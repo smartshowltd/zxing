@@ -48,7 +48,6 @@
   AVCaptureVideoPreviewLayer *prevLayer;
 #endif
   BOOL decoding;
-  BOOL isStatusBarHidden;
 }
 
 #if HAS_AVFF

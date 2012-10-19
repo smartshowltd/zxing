@@ -36,7 +36,6 @@
 @property BOOL showCancel;
 @property BOOL showLicense;
 @property BOOL oneDMode;
-@property BOOL isStatusBarHidden;
 
 - (void)initCapture;
 - (void)stopCapture;
@@ -51,7 +50,7 @@
 #endif
 @synthesize result, delegate, soundToPlay;
 @synthesize overlayView;
-@synthesize oneDMode, showCancel, showLicense, isStatusBarHidden;
+@synthesize oneDMode, showCancel, showLicense;
 @synthesize readers;
 
 
@@ -67,9 +66,12 @@
     self.oneDMode = shouldUseoOneDMode;
     self.showCancel = shouldShowCancel;
     self.showLicense = shouldShowLicense;
-    self.wantsFullScreenLayout = YES;
     beepSound = -1;
     decoding = NO;
+      
+    // Default background is black, not previous view
+    self.view.backgroundColor = [UIColor blackColor];
+      
     OverlayView *theOverLayView = [[OverlayView alloc] initWithFrame:[UIScreen mainScreen].bounds 
                                                        cancelEnabled:showCancel 
                                                             oneDMode:oneDMode
@@ -98,9 +100,6 @@
 
 - (void)cancelled {
   [self stopCapture];
-  if (!self.isStatusBarHidden) {
-    [[UIApplication sharedApplication] setStatusBarHidden:NO];
-  }
 
   wasCancelled = YES;
   if (delegate != nil) {
@@ -127,7 +126,6 @@
 
 - (void)viewWillAppear:(BOOL)animated {
   [super viewWillAppear:animated];
-  self.wantsFullScreenLayout = YES;
   if ([self soundToPlay] != nil) {
     OSStatus error = AudioServicesCreateSystemSoundID((CFURLRef)[self soundToPlay], &beepSound);
     if (error != kAudioServicesNoError) {
@@ -138,9 +136,6 @@
 
 - (void)viewDidAppear:(BOOL)animated {
   [super viewDidAppear:animated];
-  self.isStatusBarHidden = [[UIApplication sharedApplication] isStatusBarHidden];
-  if (!isStatusBarHidden)
-    [[UIApplication sharedApplication] setStatusBarHidden:YES];
 
   decoding = YES;
 
@@ -153,8 +148,6 @@
 
 - (void)viewDidDisappear:(BOOL)animated {
   [super viewDidDisappear:animated];
-  if (!isStatusBarHidden)
-    [[UIApplication sharedApplication] setStatusBarHidden:NO];
   [self.overlayView removeFromSuperview];
   [self stopCapture];
 }
@@ -275,7 +268,6 @@
 }
 
 - (void)notifyDelegate:(id)text {
-  if (!isStatusBarHidden) [[UIApplication sharedApplication] setStatusBarHidden:NO];
   [delegate zxingController:self didScanResult:text];
   [text release];
 }
