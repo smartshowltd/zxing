@@ -1576,23 +1576,18 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = armv7;
+				CLANG_CXX_LANGUAGE_STANDARD = "c++98";
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				"GCC_THUMB_SUPPORT[arch=armv6]" = NO;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
-				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = ../../cpp/core/src;
 				"HEADER_SEARCH_PATHS[arch=*]" = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				OTHER_LDFLAGS = "-ObjC";
 				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
 				VALID_ARCHS = armv7;
-				WARNING_CFLAGS = (
-					"-Wall",
-					"-Wextra",
-					"-Werror",
-					"-Wno-unused-parameter",
-				);
 			};
 			name = Debug;
 		};
@@ -1600,22 +1595,17 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = armv7;
+				CLANG_CXX_LANGUAGE_STANDARD = "c++98";
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				"GCC_THUMB_SUPPORT[arch=armv6]" = NO;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
-				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = ../../cpp/core/src;
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				OTHER_LDFLAGS = "-ObjC";
 				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
 				VALID_ARCHS = armv7;
-				WARNING_CFLAGS = (
-					"-Wall",
-					"-Wextra",
-					"-Werror",
-					"-Wno-unused-parameter",
-				);
 			};
 			name = Release;
 		};
